@@ -41,39 +41,71 @@ void main() {
 }
 
 /* Add other Implementation File Code Here */
+
 int called_by_print_stat=0;
 
 void sort_array(unsigned char test[])
 {
-	
+	for(int i=0; i<SIZE-1; ++i)
+		for(int j=i+1; j<SIZE; ++j)
+		{
+			int pos=i;
+			if (test[j]>test[i])
+			{
+				pos=j;	
+			}
+			int temp=test[i];
+			test[i]=test[pos];
+			test[pos]=temp;
+		}
 }
 
 void print_array(unsigned char test[])
 {
-	
+	for(int i=0;i<SIZE;++i)
+	{
+		printf("%c",test[i]);
+	}
 }
 
 unsigned char find_median(unsigned char test[])
 {
-
+	if(called_by_print_stat=0)
+		sort_array(test);
+	return (test[SIZE/2]+test[SIZE/2-1])/2;
 }
 
 unsigned char find_mean(unsigned char test[])
 {
-	
+	int mean=0;
+	for(int i=0;i<SIZE;++i)
+		mean+=test[i];
+			
+	mean/=SIZE;
+	return mean;	
 }
 
 unsigned char find_maximum(unsigned char test[])
 {	
-	
+	if(called_by_print_stat=0)
+		sort_array(test);
+	return test[SIZE-1];
 }
 
 unsigned char find_minimum(unsigned char test[])
 {
-	
+	if(called_by_print_stat=0)
+		sort_array(test);
+	return test[0];
 }
+
+
 
 void print_statistics(unsigned char test[])
 {
-			
+	called_by_print_stat=1;
+	sort_array(test);
+	int min=find_minimum(test),max=find_maximum(test),mean=find_mean(test),median=find_median(test);
+	printf("Minimum= %d\nMaximum= %d\nMean= %d\nMedian= %d\n",min,max,mean,median);
+		
 }
